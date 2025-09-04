@@ -93,8 +93,9 @@ export default function Page() {
               cart.length > 0 ?  
         (
           <>
-            <div className="total-count">
-              total count
+            <div className="total-count text-xl font-bold text-gray-700 my-5 capitalize flex justify-between px-5">
+              <p>total</p>
+              <p>${Math.round(totalcost * 100) / 100}</p>
             </div>
             <div className="proceed-button-container">
               <button 
