@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Card from "./components/Card";
 import { Toaster } from "react-hot-toast";
 

@@ -2,14 +2,14 @@
 import { useContext } from "react";
 import { GlobalContext } from "../globalproviders/GlobalProvider";
 import { Trash2 } from "lucide-react";
-
 import Image from "next/image";
+import { redirect } from "next/navigation";
+
 
 export default function Page() {
     const ctx = useContext(GlobalContext);
     const {cart , dispatch} = ctx;
    
-    console.log(dispatch);
   const handleProductIncrement = (id: number) => {
     dispatch({ type: "INCREMENT_LIST_ITEM", payload : {id : id} });
   };
@@ -22,19 +22,29 @@ export default function Page() {
      dispatch({type : "DELETE_LIST_ITEM" , payload : {id : id}})
   }
 
+        const totalcost = cart.reduce((acc : any, item : any) => {
+                       acc+=(item.quantity * item.price);
+                       return acc;
+        } , 0) 
+        console.log(totalcost);
+        
+        
   return (
     <div className="min-h-[85vh]">
-      <h1 className="text-center font-semibold my-5 text-5xl text-shadow-2xs">
+      <h1 className="text-center font-semibold my-5 text-3xl text-shadow-2xs">
         checkout items
       </h1>
-      <div className="max-w-[50rem] min-w-[10rem] shadow-md rounded-xl min-h-[20rem] mx-auto">
-        <h2 className="text-center">your cart</h2>
+      <div className="max-w-[50rem] min-w-[10rem] shadow-md rounded-xl min-h-[20rem] mx-auto flex flex-col justify-between">
+        <h2 className="text-center font-normal text-shadow-gray-800 text-xl">your cart</h2>
 
         <div className="item-list mx-2">
           {/* single product item  */}
           {cart.length === 0 ? (
-            <div className="text-center font-semibold text-gray-600 my-10 text-3xl">
-              {"your cart is empty"}
+            <div className="text-center font-semibold text-gray-600 my-10 text-3xl flex flex-col gap-4 items-center">
+              <p>{"your cart is empty"}</p>
+              <button
+              onClick={() => {redirect('/')}}
+              className="bg-gray-700 text-gray-50 font-light py-2 cursor-pointer rounded-md !inline w-1/2 text-xl">back to shopping </button>
             </div>
           ) : (
             cart.map(({ id, thumbnail, price, title, quantity }, index) => {
@@ -76,7 +86,24 @@ export default function Page() {
               );
             })
           )}
-        </div>  
+        </div> 
+
+        {/* total count is here   */}
+            {
+              cart.length > 0 ?  
+        (
+          <>
+            <div className="total-count">
+              total count
+            </div>
+            <div className="proceed-button-container">
+              <button 
+              className="bg-gray-700 py-3 shadow-md hover:scale-105 transition-all hover:shadow-lg rounded-md  cursor-pointer text-gray-50 font-semibold text-xl block w-full">proceed to checkout</button>
+            </div>
+          </>
+        )
+              : ""
+            }
       </div>
     </div>
   );

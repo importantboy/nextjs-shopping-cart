@@ -10,6 +10,8 @@ export const GlobalContext = createContext<{
   dispatch: () => {},
 });
 
+
+
 type CartItem = {
   id: number;
   thumbnail: string;
@@ -78,4 +80,3 @@ export default function GlobalProvider({ children }: { children: ReactNode }) {
     </GlobalContext.Provider>
   );
 }
-  

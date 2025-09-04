@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { GlobalContext } from "../globalproviders/GlobalProvider";
 export default function Header() {
   const ctx = useContext(GlobalContext);
-  let length = ctx.cart.length;
+  const length = ctx.cart.length;
   return (
     <div className="py-5 bg-gray-800  text-gray-50 flex px-20 justify-between ">
       <Link
