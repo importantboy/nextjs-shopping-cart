@@ -2,7 +2,7 @@ import Card from "./components/Card";
 import { Toaster } from "react-hot-toast";
 
 export default async function Home() {
-  const url = 'https://dummyjson.com/products?limit=8';
+  const url = 'https://dummyjson.com/products?limit=20';
         const options = {method: 'GET', headers: {accept: 'application/json'}};
             let apidata = null;
         try {
